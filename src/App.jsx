@@ -1,7 +1,13 @@
+import { Route, Routes } from 'react-router-dom';
+
+import HomePage from './pages/HomePage';
+
 export default function App() {
     return (
-        <button className="bg-sky-700 px-4 py-2 text-white hover:bg-sky-800 sm:px-8 sm:py-3">
-            ...
-        </button>
+        <div className="App">
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+            </Routes>
+        </div>
     );
 }
