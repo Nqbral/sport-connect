@@ -9,6 +9,7 @@ export default {
             primary: colors.blue,
             stone: colors.stone,
             transparent: colors.transparent,
+            red: colors.red,
             white: colors.white,
         },
         extend: {},
