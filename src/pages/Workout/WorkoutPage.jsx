@@ -14,6 +14,7 @@ const API_URL = process.env.API_URL;
 export default function WorkoutPage() {
     const [listWorkouts, setListWorkouts] = useState([]);
 
+    // Load the list of workouts
     useEffect(() => {
         const storedToken = localStorage.getItem('authToken');
 
@@ -26,6 +27,28 @@ export default function WorkoutPage() {
             })
             .catch((error) => console.log(error));
     }, []);
+
+    // Delete the workout using the _id of the workout
+    const deleteWorkout = (workoutId) => {
+        const storedToken = localStorage.getItem('authToken');
+
+        axios
+            .delete(`${API_URL}/api/workouts/${workoutId}`, {
+                headers: { Authorization: `Bearer ${storedToken}` },
+            })
+            .then(() => {
+                let _arr = [...listWorkouts];
+
+                let indexDeleted = _arr.findIndex((workout) => {
+                    return workout._id === workoutId;
+                });
+
+                _arr.splice(indexDeleted, 1);
+
+                setListWorkouts(_arr);
+            })
+            .catch((error) => console.log(error));
+    };
 
     return (
         <ClassicPage pageSelectedNavbar={PAGE_SELECTED.WORKOUT}>
@@ -46,22 +69,34 @@ export default function WorkoutPage() {
                             Aucun entraînement de créé
                         </div>
                     ) : (
-                        <div className="flex flex-col">
+                        <div className="flex flex-col gap-3">
                             {listWorkouts.map((workout) => {
                                 return (
                                     <div
                                         key={workout._id}
-                                        className="flex flex-row gap-3"
+                                        className="shadow-neutral flex min-w-64 flex-row justify-between rounded-md p-4 shadow-md md:w-1/2"
                                     >
                                         <div>{workout.name}</div>
-                                        <Link
-                                            to={`/workout/edit/${workout._id}`}
-                                        >
-                                            <FontAwesomeIcon
-                                                icon={faPen}
-                                                className="transition-colors duration-300 hover:text-primary-600"
-                                            />
-                                        </Link>
+                                        <div className="flex flex-row gap-3">
+                                            <Link
+                                                to={`/workout/edit/${workout._id}`}
+                                            >
+                                                <FontAwesomeIcon
+                                                    icon={faPen}
+                                                    className="transition-colors duration-300 hover:text-primary-600"
+                                                />
+                                            </Link>
+                                            <button
+                                                onClick={() =>
+                                                    deleteWorkout(workout._id)
+                                                }
+                                            >
+                                                <FontAwesomeIcon
+                                                    icon={faTrash}
+                                                    className="hover:text-red-600 transition-colors duration-300"
+                                                />
+                                            </button>
+                                        </div>
                                     </div>
                                 );
                             })}

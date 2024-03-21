@@ -41,6 +41,7 @@ export default function WorkoutForm({ isCreation, editedWorkout }) {
     const [openEditingExercise, setOpenEditingExercise] = useState(false);
     const [openEditingRest, setOpenEditingRest] = useState(false);
 
+    // state to get number of added exercises (will increment only and use as identifier in drag&drop)
     const [addedExercises, setAddedExercises] = useState(0);
 
     // function to handle modal open adding exercice
@@ -195,10 +196,13 @@ export default function WorkoutForm({ isCreation, editedWorkout }) {
         }
     }, [editedWorkout]);
 
+    // Handle submit button
     const handleSubmit = () => {
+        // Delete error messages
         setErrMsgName('');
         setErrMsgExercises('');
 
+        // check if has an error in the form and update error messages
         if (!validName || !validExercises) {
             if (!validName) {
                 setErrMsgName('Veuillez saisir un nom de programme valide.');
@@ -210,6 +214,7 @@ export default function WorkoutForm({ isCreation, editedWorkout }) {
             return;
         }
 
+        // send the request
         requestValidation()
             .then(() => {
                 navigate('/workout');
@@ -221,9 +226,11 @@ export default function WorkoutForm({ isCreation, editedWorkout }) {
             });
     };
 
+    // Request sent when validating form
     const requestValidation = () => {
         const storedToken = localStorage.getItem('authToken');
 
+        // Creation request
         if (isCreation) {
             return axios.post(
                 `${API_URL}/api/workouts/`,
@@ -252,6 +259,7 @@ export default function WorkoutForm({ isCreation, editedWorkout }) {
             );
         }
 
+        // Update request
         return axios.put(
             `${API_URL}/api/workouts/${editedWorkout._id}`,
             {
