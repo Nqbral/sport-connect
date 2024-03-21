@@ -9,7 +9,7 @@ export default function ClassicPage({
     return (
         <>
             <ProfileBar linkToBackButton={linkToBackButton} />
-            <div className="absolute top-16 w-full md:left-1/4 md:w-3/4">
+            <div className="absolute top-16 min-h-screen w-full bg-stone-200 md:left-1/4 md:w-3/4">
                 {children}
             </div>
             <NavBar pageSelected={pageSelectedNavbar} />

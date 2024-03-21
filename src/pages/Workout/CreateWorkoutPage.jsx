@@ -1,5 +1,7 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import { useNavigate } from 'react-router-dom';
 
 import PrimaryButton from '../../components/buttons/PrimaryButton';
 import SecondaryButton from '../../components/buttons/SecondaryButton';
@@ -13,8 +15,11 @@ import ClassicPage from '../../layouts/ClassicPage';
 import { PAGE_SELECTED } from '../../layouts/NavBar';
 
 const ALPHANUM_REGEX = /^[a-z\d\-_\s]+$/i;
+const API_URL = process.env.API_URL;
 
 export default function CreateWorkoutPage() {
+    const navigate = useNavigate();
+
     const [name, setName] = useState('');
     const [exercises, setExercises] = useState([]);
 
@@ -170,6 +175,43 @@ export default function CreateWorkoutPage() {
             }
             return;
         }
+
+        const storedToken = localStorage.getItem('authToken');
+
+        axios
+            .post(
+                `${API_URL}/api/workouts/`,
+                {
+                    name: name,
+                    exercises: exercises.map((exercise) => {
+                        if (exercise.type == 'exercise') {
+                            return {
+                                exercise: exercise.exercise._id,
+                                nbSeries: exercise.nbSeries,
+                                nbReps: exercise.nbReps,
+                                timeRest: exercise.timeRest,
+                                type: 'exercise',
+                            };
+                        }
+
+                        return {
+                            timeRest: exercise.timeRest,
+                            type: 'rest',
+                        };
+                    }),
+                },
+                {
+                    headers: { Authorization: `Bearer ${storedToken}` },
+                },
+            )
+            .then(() => {
+                navigate('/workout');
+            })
+            .catch((error) => {
+                console.log(error);
+                const errorDescription = error.response.data.message;
+                setErrMsg(errorDescription);
+            });
     };
 
     useEffect(() => {
