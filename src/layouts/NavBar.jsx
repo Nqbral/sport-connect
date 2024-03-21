@@ -1,7 +1,10 @@
 import { faNewspaper } from '@fortawesome/free-regular-svg-icons';
 import { faDumbbell, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import { AuthContext } from '../context/auth.context';
 
 export const PAGE_SELECTED = {
     FEED: 'feed_selected',
@@ -10,6 +13,8 @@ export const PAGE_SELECTED = {
 };
 
 export default function NavBar({ pageSelected }) {
+    const { user } = useContext(AuthContext);
+
     let pages = [
         {
             text: 'Actualités',
@@ -27,7 +32,7 @@ export default function NavBar({ pageSelected }) {
             text: 'Profil',
             icon: faUser,
             selected: PAGE_SELECTED.PROFILE == pageSelected,
-            linkTo: '/profile',
+            linkTo: `/profile/${user.name}`,
         },
     ];
 
