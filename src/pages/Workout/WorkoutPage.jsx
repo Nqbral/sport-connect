@@ -1,5 +1,9 @@
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import LinkButton from '../../components/buttons/LinkButton';
 import ClassicPage from '../../layouts/ClassicPage';
@@ -43,9 +47,22 @@ export default function WorkoutPage() {
                         </div>
                     ) : (
                         <div className="flex flex-col">
-                            {listWorkouts.map((workout, index) => {
+                            {listWorkouts.map((workout) => {
                                 return (
-                                    <div key={workout._id}>{workout.name}</div>
+                                    <div
+                                        key={workout._id}
+                                        className="flex flex-row gap-3"
+                                    >
+                                        <div>{workout.name}</div>
+                                        <Link
+                                            to={`/workout/edit/${workout._id}`}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faPen}
+                                                className="transition-colors duration-300 hover:text-primary-600"
+                                            />
+                                        </Link>
+                                    </div>
                                 );
                             })}
                         </div>
