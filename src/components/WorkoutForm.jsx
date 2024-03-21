@@ -15,7 +15,7 @@ import EditRestModal from './modals/EditRestModal';
 const ALPHANUM_REGEX = /^[a-z\d\-_\s]+$/i;
 const API_URL = process.env.API_URL;
 
-export default function WorkoutForm() {
+export default function WorkoutForm({ isCreation, editedWorkout }) {
     // Navigation
     const navigate = useNavigate();
 
@@ -179,6 +179,22 @@ export default function WorkoutForm() {
         setValidExercises(exercises.length > 0);
     }, [exercises]);
 
+    // Use effect for loading workout when editing workout
+    useEffect(() => {
+        if (!isCreation && editedWorkout != null) {
+            setName(editedWorkout.name);
+
+            let _arr = [...editedWorkout.exercises];
+
+            // add identifier to use drag&drop index
+            _arr = _arr.map((exercise, index) => {
+                exercise.id = index;
+                return exercise;
+            });
+            setExercises(_arr);
+        }
+    }, [editedWorkout]);
+
     const handleSubmit = () => {
         setErrMsgName('');
         setErrMsgExercises('');
@@ -194,10 +210,22 @@ export default function WorkoutForm() {
             return;
         }
 
+        requestValidation()
+            .then(() => {
+                navigate('/workout');
+            })
+            .catch((error) => {
+                console.log(error);
+                const errorDescription = error.response.data.message;
+                setErrMsg(errorDescription);
+            });
+    };
+
+    const requestValidation = () => {
         const storedToken = localStorage.getItem('authToken');
 
-        axios
-            .post(
+        if (isCreation) {
+            return axios.post(
                 `${API_URL}/api/workouts/`,
                 {
                     name: name,
@@ -221,15 +249,34 @@ export default function WorkoutForm() {
                 {
                     headers: { Authorization: `Bearer ${storedToken}` },
                 },
-            )
-            .then(() => {
-                navigate('/workout');
-            })
-            .catch((error) => {
-                console.log(error);
-                const errorDescription = error.response.data.message;
-                setErrMsg(errorDescription);
-            });
+            );
+        }
+
+        return axios.put(
+            `${API_URL}/api/workouts/${editedWorkout._id}`,
+            {
+                name: name,
+                exercises: exercises.map((exercise) => {
+                    if (exercise.type == 'exercise') {
+                        return {
+                            exercise: exercise.exercise._id,
+                            nbSeries: exercise.nbSeries,
+                            nbReps: exercise.nbReps,
+                            timeRest: exercise.timeRest,
+                            type: 'exercise',
+                        };
+                    }
+
+                    return {
+                        timeRest: exercise.timeRest,
+                        type: 'rest',
+                    };
+                }),
+            },
+            {
+                headers: { Authorization: `Bearer ${storedToken}` },
+            },
+        );
     };
 
     return (
@@ -242,6 +289,7 @@ export default function WorkoutForm() {
             </p>
             <label htmlFor="name">Nom du programme</label>
             <input
+                defaultValue={name}
                 type="text"
                 name="name"
                 className="mb-2 rounded-md border-2 border-neutral-300 bg-transparent px-1 text-center outline-none transition-colors duration-300 focus:border-primary-500"
@@ -277,6 +325,7 @@ export default function WorkoutForm() {
                         <Droppable droppableId="exercises-wrapper">
                             {(provided) => (
                                 <ExercisesDraggable
+                                    key={provided.key}
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                 >
@@ -317,7 +366,9 @@ export default function WorkoutForm() {
             </div>
 
             <PrimaryButton
-                buttonText={'Créer le programme'}
+                buttonText={
+                    isCreation ? 'Créer le programme' : 'Éditer le programme'
+                }
                 onClick={handleSubmit}
             />
 

@@ -17,7 +17,7 @@ export default function CreateWorkoutPage() {
                         Création d&apos;un programme
                     </h2>
 
-                    <WorkoutForm />
+                    <WorkoutForm isCreation={true} editedWorkout={null} />
                 </section>
             </ClassicPage>
         </>
