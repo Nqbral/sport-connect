@@ -1,3 +1,4 @@
+import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,7 +12,7 @@ import { PAGE_SELECTED } from '../../layouts/NavBar';
 
 const API_URL = process.env.API_URL;
 
-export default function WorkoutPage() {
+export default function WorkoutListPage() {
     const [listWorkouts, setListWorkouts] = useState([]);
 
     // Load the list of workouts
@@ -78,6 +79,14 @@ export default function WorkoutPage() {
                                     >
                                         <div>{workout.name}</div>
                                         <div className="flex flex-row gap-3">
+                                            <Link
+                                                to={`/workout/${workout._id}`}
+                                            >
+                                                <FontAwesomeIcon
+                                                    icon={faEye}
+                                                    className="transition-colors duration-300 hover:text-primary-600"
+                                                />
+                                            </Link>
                                             <Link
                                                 to={`/workout/edit/${workout._id}`}
                                             >
