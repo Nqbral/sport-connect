@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import LinkButton from '../../components/buttons/LinkButton';
 import RedButton from '../../components/buttons/RedButton';
-import SecondaryButton from '../../components/buttons/SecondaryButton';
 import ExerciseListTile from '../../components/list_tile/Exercise';
 import { AuthContext } from '../../context/auth.context';
 import ClassicPage from '../../layouts/ClassicPage';

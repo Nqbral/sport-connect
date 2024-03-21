@@ -26,7 +26,7 @@ export default function ProfileBar({ linkToBackButton = null }) {
                     to="/profile"
                     className="flex flex-row items-center gap-3"
                 >
-                    <img src={userLogo} className=" h-8" alt="user_logo" />
+                    <img src={userLogo} className="h-8" alt="user_logo" />
                     <div className="text-white">@{user.name}</div>
                 </Link>
             </div>
