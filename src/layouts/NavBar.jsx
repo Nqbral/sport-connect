@@ -32,8 +32,8 @@ export default function NavBar({ pageSelected }) {
     ];
 
     return (
-        <nav className="md: fixed bottom-0 w-screen border-t-2 border-neutral-400 py-5 md:bottom-auto">
-            <div className="flex w-screen flex-row justify-evenly md:w-10 md:flex-col">
+        <nav className="fixed bottom-0 w-screen border-t-2 border-neutral-400 bg-stone-300 py-5 md:bottom-auto md:h-screen md:w-1/4 md:border-r-2 md:border-t-0 md:pl-3 md:text-xl">
+            <div className="flex w-screen flex-row justify-evenly md:w-10 md:flex-col md:gap-4 md:pt-12">
                 {pages.map((page, index) => {
                     let classes =
                         'flex flex-col w-1/3 items-center md:flex-row md:gap-2 md:w-auto';

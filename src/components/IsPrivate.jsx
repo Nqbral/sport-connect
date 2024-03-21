@@ -4,7 +4,11 @@ import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 
 export default function IsPrivate({ children }) {
-    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoading, isLoggedIn } = useContext(AuthContext);
+
+    if (isLoading) {
+        return <></>;
+    }
 
     if (!isLoggedIn) {
         return <Navigate to="/" />;

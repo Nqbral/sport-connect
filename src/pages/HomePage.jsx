@@ -1,10 +1,9 @@
 import axios from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
 
-import SignUpModal from '../components/SignUpModal';
 import PrimaryButton from '../components/buttons/PrimaryButton';
+import SignUpModal from '../components/modals/SignUpModal';
 import { AuthContext } from '../context/auth.context';
 
 export default function HomePage() {
