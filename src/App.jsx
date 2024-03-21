@@ -7,7 +7,8 @@ import HomePage from './pages/HomePage';
 import ProfilePage from './pages/Profile/ProfilePage';
 import CreateWorkoutPage from './pages/Workout/CreateWorkoutPage';
 import EditWorkoutPage from './pages/Workout/EditWorkoutPage';
-import WorkoutPage from './pages/Workout/WorkoutPage';
+import WorkoutDetailPage from './pages/Workout/WorkoutDetailPage';
+import WorkoutListPage from './pages/Workout/WorkoutListPage';
 
 export default function App() {
     return (
@@ -33,7 +34,15 @@ export default function App() {
                     path="/workout"
                     element={
                         <IsPrivate>
-                            <WorkoutPage />
+                            <WorkoutListPage />
+                        </IsPrivate>
+                    }
+                />
+                <Route
+                    path="/workout/:workoutId"
+                    element={
+                        <IsPrivate>
+                            <WorkoutDetailPage />
                         </IsPrivate>
                     }
                 />
