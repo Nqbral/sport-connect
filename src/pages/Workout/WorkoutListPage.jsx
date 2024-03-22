@@ -52,67 +52,63 @@ export default function WorkoutListPage() {
     };
 
     return (
-        <ClassicPage pageSelectedNavbar={PAGE_SELECTED.WORKOUT}>
-            <section
-                id="workout-page"
-                className="flex w-full flex-col items-center gap-2"
-            >
-                <h2 className="text-xl font-bold">Musculation</h2>
-                <LinkButton
-                    buttonText={'Créer un programme'}
-                    linkTo={'/workout/create'}
-                />
+        <ClassicPage
+            pageSelectedNavbar={PAGE_SELECTED.WORKOUT}
+            sectionId={'section-workout-list-page'}
+        >
+            <h2 className="text-xl font-bold">Musculation</h2>
+            <LinkButton
+                buttonText={'Créer un programme'}
+                linkTo={'/workout/create'}
+            />
 
-                <div className="flex min-w-80 flex-col items-center gap-3 rounded-md p-4 shadow-md shadow-neutral-500 md:w-1/2">
-                    <div className="font-bold">Liste des entraînements</div>
-                    {listWorkouts.length == 0 ? (
-                        <div className="italic text-neutral-500">
-                            Aucun entraînement de créé
-                        </div>
-                    ) : (
-                        <div className="flex flex-col gap-3">
-                            {listWorkouts.map((workout) => {
-                                return (
-                                    <div
-                                        key={workout._id}
-                                        className="shadow-neutral flex min-w-64 flex-row justify-between rounded-md p-4 shadow-md md:w-1/2"
-                                    >
-                                        <div>{workout.name}</div>
-                                        <div className="flex flex-row gap-3">
-                                            <Link
-                                                to={`/workout/${workout._id}`}
-                                            >
-                                                <FontAwesomeIcon
-                                                    icon={faEye}
-                                                    className="transition-colors duration-300 hover:text-primary-600"
-                                                />
-                                            </Link>
-                                            <Link
-                                                to={`/workout/edit/${workout._id}`}
-                                            >
-                                                <FontAwesomeIcon
-                                                    icon={faPen}
-                                                    className="transition-colors duration-300 hover:text-primary-600"
-                                                />
-                                            </Link>
-                                            <button
-                                                onClick={() =>
-                                                    deleteWorkout(workout._id)
-                                                }
-                                            >
-                                                <FontAwesomeIcon
-                                                    icon={faTrash}
-                                                    className="hover:text-red-600 transition-colors duration-300"
-                                                />
-                                            </button>
-                                        </div>
+            <div className="flex min-w-80 flex-col items-center gap-3 rounded-md p-4 shadow-md shadow-neutral-500 md:w-1/2">
+                <div className="font-bold">Liste des entraînements</div>
+                {listWorkouts.length == 0 ? (
+                    <div className="italic text-neutral-500">
+                        Aucun entraînement de créé
+                    </div>
+                ) : (
+                    <div className="flex flex-col gap-3">
+                        {listWorkouts.map((workout) => {
+                            return (
+                                <div
+                                    key={workout._id}
+                                    className="shadow-neutral flex min-w-64 flex-row justify-between rounded-md p-4 shadow-md md:w-1/2"
+                                >
+                                    <div>{workout.name}</div>
+                                    <div className="flex flex-row gap-3">
+                                        <Link to={`/workout/${workout._id}`}>
+                                            <FontAwesomeIcon
+                                                icon={faEye}
+                                                className="transition-colors duration-300 hover:text-primary-600"
+                                            />
+                                        </Link>
+                                        <Link
+                                            to={`/workout/edit/${workout._id}`}
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faPen}
+                                                className="transition-colors duration-300 hover:text-primary-600"
+                                            />
+                                        </Link>
+                                        <button
+                                            onClick={() =>
+                                                deleteWorkout(workout._id)
+                                            }
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faTrash}
+                                                className="hover:text-red-600 transition-colors duration-300"
+                                            />
+                                        </button>
                                     </div>
-                                );
-                            })}
-                        </div>
-                    )}
-                </div>
-            </section>
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
+            </div>
         </ClassicPage>
     );
 }
