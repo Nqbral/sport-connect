@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 import ReactLoading from 'react-loading';
 
 import SearchUser from '../components/list_tile/SearchUser';
@@ -13,10 +14,13 @@ export default function SearchPage() {
     const [typeSearch, setTypeSearch] = useState('users');
     const [searchWord, setSearchWord] = useState('');
     const [results, setResults] = useState([]);
+    const [hasMoreData, setHasMoreData] = useState(false);
     const [page, setPage] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
 
     const handleChangeTypeSearch = (event) => {
+        setIsLoading(true);
+        setResults([]);
         setTypeSearch(event.target.value);
         setPage(0);
 
@@ -32,12 +36,12 @@ export default function SearchPage() {
     };
 
     useEffect(() => {
-        setIsLoading(true);
         if (searchWord == '') {
-            setResults([]);
             setIsLoading(false);
             return;
         }
+
+        setHasMoreData(true);
 
         const delayBounce = setTimeout(async () => {
             await fetchData();
@@ -48,6 +52,7 @@ export default function SearchPage() {
     }, [searchWord, typeSearch]);
 
     const fetchData = async () => {
+        console.log('fetchData');
         const storedToken = localStorage.getItem('authToken');
 
         axios
@@ -55,7 +60,12 @@ export default function SearchPage() {
                 headers: { Authorization: `Bearer ${storedToken}` },
             })
             .then((response) => {
-                setResults(response.data);
+                setResults(results.concat(response.data));
+                setPage(page + 1);
+
+                if (response.data.length == 0) {
+                    setHasMoreData(false);
+                }
             })
             .catch((error) => console.log(error));
     };
@@ -119,22 +129,30 @@ export default function SearchPage() {
                                 Aucun résultat
                             </div>
                         ) : (
-                            results.map((result) => {
-                                if (typeSearch == 'users') {
+                            <InfiniteScroll
+                                loadMore={fetchData}
+                                hasMore={hasMoreData}
+                                loader={
+                                    <ReactLoading type="spin" color="#1D4ED8" />
+                                }
+                            >
+                                {results.map((result) => {
+                                    if (typeSearch == 'users') {
+                                        return (
+                                            <SearchUser
+                                                key={result._id}
+                                                user={result}
+                                            />
+                                        );
+                                    }
                                     return (
-                                        <SearchUser
+                                        <SearchWorkout
                                             key={result._id}
-                                            user={result}
+                                            workout={result}
                                         />
                                     );
-                                }
-                                return (
-                                    <SearchWorkout
-                                        key={result._id}
-                                        workout={result}
-                                    />
-                                );
-                            })
+                                })}
+                            </InfiniteScroll>
                         )}
                     </div>
                 </section>

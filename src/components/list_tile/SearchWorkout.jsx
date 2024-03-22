@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import userLogo from '../../assets/user.png';
 
 export default function SearchWorkout({ workout }) {
-    console.log(workout);
     return (
         <>
             <Link to={`/workout/${workout._id}`}>
