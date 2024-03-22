@@ -18,7 +18,6 @@ export default function ProfilePosts({ userPage }) {
     }, [userPage]);
 
     const getPosts = () => {
-        console.log('getPost');
         const storedToken = localStorage.getItem('authToken');
 
         axios
