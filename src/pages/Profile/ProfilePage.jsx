@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import ReactLoading from 'react-loading';
 import { useParams } from 'react-router-dom';
 
 import ProfileInformations from '../../components/profile/ProfileInformations';
@@ -15,6 +16,10 @@ export default function ProfilePage() {
     const [userPage, setUserPage] = useState(null);
 
     useEffect(() => {
+        getUser();
+    }, [username]);
+
+    const getUser = async () => {
         const storedToken = localStorage.getItem('authToken');
 
         axios
@@ -25,7 +30,7 @@ export default function ProfilePage() {
                 setUserPage(response.data);
             })
             .catch((error) => console.log(error));
-    }, [username]);
+    };
 
     return (
         <>
@@ -35,7 +40,7 @@ export default function ProfilePage() {
                     className="flex w-full flex-col items-center gap-3 pb-4"
                 >
                     {userPage == null ? (
-                        <>loading</>
+                        <ReactLoading type="spin" color="#1D4ED8" />
                     ) : (
                         <>
                             <h2 className="text-xl font-bold">
