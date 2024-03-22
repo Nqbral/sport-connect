@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
+import logo from '../assets/logo.png';
 import { AuthContext } from '../context/auth.context';
 
 export const PAGE_SELECTED = {
@@ -72,13 +73,22 @@ export default function NavBar({ pageSelected }) {
                     })}
                 </div>
 
-                <button
-                    className="hidden flex-row items-center justify-center gap-2 border-t-2 border-neutral-500 pt-2 text-neutral-500 md:flex"
-                    onClick={logOutUser}
-                >
-                    <FontAwesomeIcon icon={faPowerOff}></FontAwesomeIcon>
-                    <div>Se déconnecter</div>
-                </button>
+                <div className="flex flex-col">
+                    <div className="hidden flex-col items-center pb-10 md:flex">
+                        <img
+                            src={logo}
+                            alt="logo"
+                            className="h-24 rounded-full shadow-lg shadow-neutral-500"
+                        />
+                    </div>
+                    <button
+                        className="hidden flex-row items-center justify-center gap-2 border-t-2 border-neutral-500 pt-2 text-neutral-500 md:flex"
+                        onClick={logOutUser}
+                    >
+                        <FontAwesomeIcon icon={faPowerOff}></FontAwesomeIcon>
+                        <div>Se déconnecter</div>
+                    </button>
+                </div>
             </div>
         </nav>
     );

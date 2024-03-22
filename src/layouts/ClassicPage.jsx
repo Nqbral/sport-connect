@@ -13,7 +13,7 @@ export default function ClassicPage({
             <div className="absolute min-h-screen w-full bg-stone-200 pt-16 md:left-1/4 md:w-3/4">
                 <section
                     id={sectionId}
-                    className="flex w-full flex-col items-center gap-3 pb-8"
+                    className="flex w-full flex-col items-center gap-3 pb-32 md:pb-8"
                 >
                     {children}
                 </section>
