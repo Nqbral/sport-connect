@@ -1,5 +1,9 @@
 import { faNewspaper } from '@fortawesome/free-regular-svg-icons';
-import { faDumbbell, faUser } from '@fortawesome/free-solid-svg-icons';
+import {
+    faDumbbell,
+    faMagnifyingGlass,
+    faUser,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
@@ -10,6 +14,7 @@ export const PAGE_SELECTED = {
     FEED: 'feed_selected',
     WORKOUT: 'workout_selected',
     PROFILE: 'profile_selected',
+    SEARCH: 'search_selected',
 };
 
 export default function NavBar({ pageSelected }) {
@@ -27,6 +32,12 @@ export default function NavBar({ pageSelected }) {
             icon: faDumbbell,
             selected: PAGE_SELECTED.WORKOUT == pageSelected,
             linkTo: '/workout',
+        },
+        {
+            text: 'Explorer',
+            icon: faMagnifyingGlass,
+            selected: PAGE_SELECTED.SEARCH == pageSelected,
+            linkTo: `/search`,
         },
         {
             text: 'Profil',

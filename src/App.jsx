@@ -6,6 +6,7 @@ import FeedPage from './pages/FeedPage';
 import HomePage from './pages/HomePage';
 import EditProfilePage from './pages/Profile/EditProfilePage';
 import ProfilePage from './pages/Profile/ProfilePage';
+import SearchPage from './pages/SearchPage';
 import CreateWorkoutPage from './pages/Workout/CreateWorkoutPage';
 import EditWorkoutPage from './pages/Workout/EditWorkoutPage';
 import WorkoutDetailPage from './pages/Workout/WorkoutDetailPage';
@@ -60,6 +61,14 @@ export default function App() {
                     element={
                         <IsPrivate>
                             <EditWorkoutPage />
+                        </IsPrivate>
+                    }
+                />
+                <Route
+                    path="/search"
+                    element={
+                        <IsPrivate>
+                            <SearchPage />
                         </IsPrivate>
                     }
                 />
