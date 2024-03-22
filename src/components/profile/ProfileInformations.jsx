@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import userLogo from '../../assets/user.png';
 import { AuthContext } from '../../context/auth.context';
+import DateHelper from '../../helpers/Date';
 import LinkButton from '../buttons/LinkButton';
 
 export default function ProfileInformations({ userPage }) {
@@ -30,16 +31,19 @@ export default function ProfileInformations({ userPage }) {
                 </div>
                 <div>
                     <span className="italic text-neutral-400">Prénom : </span>
-                    {userPage.lastname}
+                    {userPage.firstname}
                 </div>
                 <div>
                     <span className="italic text-neutral-400">
                         Date de naissance :{' '}
                     </span>
-                    {userPage.lastname}
+                    {DateHelper.formatClientDate(userPage.birthdate)}
                 </div>
                 {userConnectedIsUserPage ? (
-                    <LinkButton buttonText={'Éditer le profil'} />
+                    <LinkButton
+                        buttonText={'Éditer le profil'}
+                        linkTo={'/profile/edit'}
+                    />
                 ) : (
                     <></>
                 )}

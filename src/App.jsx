@@ -4,6 +4,7 @@ import IsAnon from './components/IsAnon';
 import IsPrivate from './components/IsPrivate';
 import FeedPage from './pages/FeedPage';
 import HomePage from './pages/HomePage';
+import EditProfilePage from './pages/Profile/EditProfilePage';
 import ProfilePage from './pages/Profile/ProfilePage';
 import CreateWorkoutPage from './pages/Workout/CreateWorkoutPage';
 import EditWorkoutPage from './pages/Workout/EditWorkoutPage';
@@ -67,6 +68,14 @@ export default function App() {
                     element={
                         <IsPrivate>
                             <ProfilePage />
+                        </IsPrivate>
+                    }
+                />
+                <Route
+                    path="/profile/edit"
+                    element={
+                        <IsPrivate>
+                            <EditProfilePage />
                         </IsPrivate>
                     }
                 />
