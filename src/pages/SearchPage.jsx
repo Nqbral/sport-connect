@@ -52,7 +52,6 @@ export default function SearchPage() {
     }, [searchWord, typeSearch]);
 
     const fetchData = async () => {
-        console.log('fetchData');
         const storedToken = localStorage.getItem('authToken');
 
         axios
