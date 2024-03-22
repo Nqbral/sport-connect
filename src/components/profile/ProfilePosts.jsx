@@ -5,6 +5,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import DateHelper from '../../helpers/Date';
 
 const API_URL = process.env.API_URL;
+const storedToken = localStorage.getItem('authToken');
 
 export default function ProfilePosts({ userPage }) {
     const [listPosts, setListPosts] = useState([]);
@@ -18,8 +19,6 @@ export default function ProfilePosts({ userPage }) {
     }, [userPage]);
 
     const getPosts = () => {
-        const storedToken = localStorage.getItem('authToken');
-
         axios
             .get(`${API_URL}/api/feedposts/user/${userPage._id}&${page}`, {
                 headers: { Authorization: `Bearer ${storedToken}` },

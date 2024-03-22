@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
+import REGEX_RULES from '../../constants';
 import PrimaryButton from '../buttons/PrimaryButton';
 import SecondaryButton from '../buttons/SecondaryButton';
 
 const API_URL = process.env.API_URL;
-const DIGIT_REGEX = /^\d+$/;
+const storedToken = localStorage.getItem('authToken');
 
 export default function EditExerciseModal({
     open,
@@ -38,8 +39,6 @@ export default function EditExerciseModal({
     const [errMsgTimeRest, setErrMsgTimeRest] = useState('');
 
     const getAllDefautExercises = () => {
-        const storedToken = localStorage.getItem('authToken');
-
         axios
             .get(`${API_URL}/api/exercises`, {
                 headers: { Authorization: `Bearer ${storedToken}` },
@@ -59,15 +58,15 @@ export default function EditExerciseModal({
     }, [exercice]);
 
     useEffect(() => {
-        setValidNbSeries(DIGIT_REGEX.test(nbSeries));
+        setValidNbSeries(REGEX_RULES.DIGIT_REGEX.test(nbSeries));
     }, [nbSeries]);
 
     useEffect(() => {
-        setValidNbReps(DIGIT_REGEX.test(nbReps));
+        setValidNbReps(REGEX_RULES.DIGIT_REGEX.test(nbReps));
     }, [nbReps]);
 
     useEffect(() => {
-        setValidTimeRest(DIGIT_REGEX.test(timeRest));
+        setValidTimeRest(REGEX_RULES.DIGIT_REGEX.test(timeRest));
     }, [timeRest]);
 
     const handleSubmit = (event) => {

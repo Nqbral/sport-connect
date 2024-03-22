@@ -10,6 +10,7 @@ import ClassicPage from '../../layouts/ClassicPage';
 import { PAGE_SELECTED } from '../../layouts/NavBar';
 
 const API_URL = process.env.API_URL;
+const storedToken = localStorage.getItem('authToken');
 
 export default function WorkoutDetailPage() {
     const { workoutId } = useParams();
@@ -20,8 +21,6 @@ export default function WorkoutDetailPage() {
 
     // Delete the workout using the _id of the workout
     const deleteWorkout = () => {
-        const storedToken = localStorage.getItem('authToken');
-
         axios
             .delete(`${API_URL}/api/workouts/${workoutId}`, {
                 headers: { Authorization: `Bearer ${storedToken}` },
@@ -33,8 +32,6 @@ export default function WorkoutDetailPage() {
     };
 
     useEffect(() => {
-        const storedToken = localStorage.getItem('authToken');
-
         axios
             .get(`${API_URL}/api/workouts/${workoutId}`, {
                 headers: { Authorization: `Bearer ${storedToken}` },
