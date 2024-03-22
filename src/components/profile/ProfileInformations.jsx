@@ -37,7 +37,9 @@ export default function ProfileInformations({ userPage }) {
                     <span className="italic text-neutral-400">
                         Date de naissance :{' '}
                     </span>
-                    {DateHelper.formatClientDate(userPage.birthdate)}
+                    {userPage.birthdate != null
+                        ? DateHelper.formatClientDate(userPage.birthdate)
+                        : ''}
                 </div>
                 {userConnectedIsUserPage ? (
                     <LinkButton
