@@ -9,7 +9,6 @@ import PrimaryButton from '../buttons/PrimaryButton';
 import RedButton from '../buttons/RedButton';
 
 const API_URL = process.env.API_URL;
-const storedToken = localStorage.getItem('authToken');
 
 export default function ProfileInformations({ userPage }) {
     const { user } = useContext(AuthContext);
@@ -26,6 +25,8 @@ export default function ProfileInformations({ userPage }) {
     }, [userPage]);
 
     const getLinkSubscribe = () => {
+        const storedToken = localStorage.getItem('authToken');
+
         axios
             .get(`${API_URL}/api/linkfollows/${userPage._id}`, {
                 headers: { Authorization: `Bearer ${storedToken}` },
@@ -40,6 +41,8 @@ export default function ProfileInformations({ userPage }) {
     };
 
     const createFollow = () => {
+        const storedToken = localStorage.getItem('authToken');
+
         axios
             .post(
                 `${API_URL}/api/linkfollows`,
@@ -56,6 +59,8 @@ export default function ProfileInformations({ userPage }) {
     };
 
     const deleteFollow = () => {
+        const storedToken = localStorage.getItem('authToken');
+
         axios
             .delete(`${API_URL}/api/linkfollows/${linkFollowId}`, {
                 headers: { Authorization: `Bearer ${storedToken}` },

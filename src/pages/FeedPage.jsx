@@ -10,7 +10,6 @@ import ClassicPage from '../layouts/ClassicPage';
 import { PAGE_SELECTED } from '../layouts/NavBar';
 
 const API_URL = process.env.API_URL;
-const storedToken = localStorage.getItem('authToken');
 
 export default function FeedPage() {
     const [page, setPage] = useState(0);
@@ -40,6 +39,8 @@ export default function FeedPage() {
     }, [isLoading]);
 
     const fetchPosts = () => {
+        const storedToken = localStorage.getItem('authToken');
+
         axios
             .get(`${API_URL}/api/feedposts/${page}`, {
                 headers: { Authorization: `Bearer ${storedToken}` },

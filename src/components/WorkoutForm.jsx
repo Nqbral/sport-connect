@@ -14,7 +14,6 @@ import EditExerciseModal from './modals/EditExerciseModal';
 import EditRestModal from './modals/EditRestModal';
 
 const API_URL = process.env.API_URL;
-const storedToken = localStorage.getItem('authToken');
 
 export default function WorkoutForm({ isCreation, editedWorkout }) {
     // Navigation
@@ -229,6 +228,8 @@ export default function WorkoutForm({ isCreation, editedWorkout }) {
 
     // Request sent when validating form
     const requestValidation = () => {
+        const storedToken = localStorage.getItem('authToken');
+
         // Creation request
         if (isCreation) {
             return axios.post(

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import logo from '../assets/logo.png';
 import PrimaryButton from '../components/buttons/PrimaryButton';
 import SignUpModal from '../components/modals/SignUpModal';
 import { AuthContext } from '../context/auth.context';
@@ -55,6 +56,13 @@ export default function HomePage() {
         <div id="homepage">
             <div className="flex flex-col md:flex-row">
                 <div className="flex h-72 w-auto flex-col items-center justify-center gap-4 bg-primary-700 text-white md:h-screen md:w-1/2">
+                    <div className="rounded-sm bg-neutral-50 shadow-lg shadow-neutral-500">
+                        <img
+                            src={logo}
+                            alt="logo"
+                            className="h-24 p-2 md:h-48"
+                        />
+                    </div>
                     <h1 className="text-5xl font-bold">Sport Connect</h1>
                     <h2 className="text-xl">
                         Construis ton corps, construis des liens

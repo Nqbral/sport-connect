@@ -9,7 +9,6 @@ import PrimaryButton from '../buttons/PrimaryButton';
 import SecondaryButton from '../buttons/SecondaryButton';
 
 const API_URL = process.env.API_URL;
-const storedToken = localStorage.getItem('authToken');
 
 export default function EditExerciseModal({
     open,
@@ -39,6 +38,8 @@ export default function EditExerciseModal({
     const [errMsgTimeRest, setErrMsgTimeRest] = useState('');
 
     const getAllDefautExercises = () => {
+        const storedToken = localStorage.getItem('authToken');
+
         axios
             .get(`${API_URL}/api/exercises`, {
                 headers: { Authorization: `Bearer ${storedToken}` },

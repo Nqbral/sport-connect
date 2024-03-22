@@ -10,7 +10,6 @@ import ClassicPage from '../../layouts/ClassicPage';
 import { PAGE_SELECTED } from '../../layouts/NavBar';
 
 const API_URL = process.env.API_URL;
-const storedToken = localStorage.getItem('authToken');
 
 export default function EditProfilePage() {
     const { user } = useContext(AuthContext);
@@ -26,6 +25,7 @@ export default function EditProfilePage() {
 
     const editInformations = (event) => {
         event.preventDefault();
+        const storedToken = localStorage.getItem('authToken');
 
         axios
             .put(
@@ -53,6 +53,8 @@ export default function EditProfilePage() {
     const changePassword = (event) => {
         event.preventDefault();
         setErrMsgPwd('');
+
+        const storedToken = localStorage.getItem('authToken');
 
         axios
             .put(
@@ -82,6 +84,8 @@ export default function EditProfilePage() {
     }, [oldPassword, newPassword]);
 
     useEffect(() => {
+        const storedToken = localStorage.getItem('authToken');
+
         axios
             .get(`${API_URL}/api/users/${user.name}`, {
                 headers: { Authorization: `Bearer ${storedToken}` },
