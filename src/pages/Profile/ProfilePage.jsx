@@ -34,24 +34,22 @@ export default function ProfilePage() {
 
     return (
         <>
-            <ClassicPage pageSelectedNavbar={PAGE_SELECTED.PROFILE}>
-                <section
-                    id="profile-page"
-                    className="flex w-full flex-col items-center gap-3 pb-4"
-                >
-                    {userPage == null ? (
-                        <ReactLoading type="spin" color="#1D4ED8" />
-                    ) : (
-                        <>
-                            <h2 className="text-xl font-bold">
-                                Profil de {userPage.name}
-                            </h2>
-                            <ProfileInformations userPage={userPage} />
-                            <ProfileWorkouts userPage={userPage} />
-                            <ProfilePosts userPage={userPage} />
-                        </>
-                    )}
-                </section>
+            <ClassicPage
+                pageSelectedNavbar={PAGE_SELECTED.PROFILE}
+                sectionId={'section-profile-details-page'}
+            >
+                {userPage == null ? (
+                    <ReactLoading type="spin" color="#1D4ED8" />
+                ) : (
+                    <>
+                        <h2 className="text-xl font-bold">
+                            Profil de {userPage.name}
+                        </h2>
+                        <ProfileInformations userPage={userPage} />
+                        <ProfileWorkouts userPage={userPage} />
+                        <ProfilePosts userPage={userPage} />
+                    </>
+                )}
             </ClassicPage>
         </>
     );

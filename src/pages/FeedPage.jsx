@@ -57,8 +57,6 @@ export default function FeedPage() {
     };
 
     const addPost = (message) => {
-        const storedToken = localStorage.getItem('authToken');
-
         axios
             .post(
                 `${API_URL}/api/feedposts`,
@@ -75,40 +73,36 @@ export default function FeedPage() {
 
     return (
         <>
-            <ClassicPage pageSelectedNavbar={PAGE_SELECTED.FEED}>
-                <section
-                    id="search-page"
-                    className="flex w-full flex-col items-center gap-3"
-                >
-                    <h2 className="text-xl font-bold">Fil d&apos;actualités</h2>
-                    <PrimaryButton
-                        buttonText={'Créer un post'}
-                        onClick={handleOpenCreatePost}
-                    />
+            <ClassicPage
+                pageSelectedNavbar={PAGE_SELECTED.FEED}
+                sectionId={'feed-page-section'}
+            >
+                <h2 className="text-xl font-bold">Fil d&apos;actualités</h2>
+                <PrimaryButton
+                    buttonText={'Créer un post'}
+                    onClick={handleOpenCreatePost}
+                />
 
-                    {isLoading ? (
-                        <ReactLoading type="spin" color="#1D4ED8" />
-                    ) : listPosts.length == 0 ? (
-                        <div className="italic text-neutral-500">
-                            Aucun post
-                        </div>
-                    ) : (
-                        <InfiniteScroll
-                            loadMore={fetchPosts}
-                            hasMore={hasMorePosts}
-                            loader={
-                                <div className="flex flex-col items-center gap-3">
-                                    <ReactLoading type="spin" color="#1D4ED8" />
-                                </div>
-                            }
-                            className="flex min-w-96 flex-col items-center gap-3 md:w-1/2"
-                        >
-                            {listPosts.map((post) => {
-                                return <FeedPost key={post._id} post={post} />;
-                            })}
-                        </InfiniteScroll>
-                    )}
-                </section>
+                {isLoading ? (
+                    <ReactLoading type="spin" color="#1D4ED8" />
+                ) : listPosts.length == 0 ? (
+                    <div className="italic text-neutral-500">Aucun post</div>
+                ) : (
+                    <InfiniteScroll
+                        loadMore={fetchPosts}
+                        hasMore={hasMorePosts}
+                        loader={
+                            <div className="flex flex-col items-center gap-3">
+                                <ReactLoading type="spin" color="#1D4ED8" />
+                            </div>
+                        }
+                        className="flex min-w-96 flex-col items-center gap-3 md:w-1/2"
+                    >
+                        {listPosts.map((post) => {
+                            return <FeedPost key={post._id} post={post} />;
+                        })}
+                    </InfiniteScroll>
+                )}
             </ClassicPage>
             <CreateFeedPostModal
                 open={openCreateFeedPostModal}

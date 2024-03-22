@@ -25,7 +25,6 @@ export default function EditProfilePage() {
 
     const editInformations = (event) => {
         event.preventDefault();
-
         const storedToken = localStorage.getItem('authToken');
 
         axios
@@ -110,108 +109,94 @@ export default function EditProfilePage() {
 
     return (
         <>
-            <ClassicPage pageSelectedNavbar={PAGE_SELECTED.PROFILE}>
-                <section
-                    id="edit-profile-page"
-                    className="flex w-full flex-col items-center gap-3"
-                >
-                    <h2 className="text-xl font-bold">Éditer le profil</h2>
+            <ClassicPage
+                pageSelectedNavbar={PAGE_SELECTED.PROFILE}
+                sectionId={'section-edit-profile-page'}
+            >
+                <h2 className="text-xl font-bold">Éditer le profil</h2>
 
-                    {/* Edit user informations section */}
-                    <form className="flex min-w-80 flex-col items-center gap-3 rounded-md p-4 shadow-md shadow-neutral-500 md:w-1/2">
-                        <div className="font-bold">
-                            Éditer les informations utilisateur
-                        </div>
+                {/* Edit user informations section */}
+                <form className="flex min-w-80 flex-col items-center gap-3 rounded-md p-4 shadow-md shadow-neutral-500 md:w-1/2">
+                    <div className="font-bold">
+                        Éditer les informations utilisateur
+                    </div>
 
-                        <label htmlFor="firstname">Prénom</label>
-                        <input
-                            type="text"
-                            name="firstname"
-                            className="rounded-md border-2 border-neutral-300 bg-transparent px-1 text-center outline-none transition-colors duration-300 focus:border-primary-500"
-                            value={firstname}
-                            onChange={(event) =>
-                                setFirstname(event.target.value)
-                            }
-                        />
-
-                        <label htmlFor="lastname">Nom</label>
-                        <input
-                            type="text"
-                            name="lastname"
-                            value={lastname}
-                            className="rounded-md border-2 border-neutral-300 bg-transparent px-1 text-center outline-none transition-colors duration-300 focus:border-primary-500"
-                            onChange={(event) =>
-                                setLastname(event.target.value)
-                            }
-                        />
-
-                        <label htmlFor="birthdate">Date de naissance</label>
-                        <input
-                            type="date"
-                            name="birthdate"
-                            value={birthdate}
-                            className="rounded-md border-2 border-neutral-300 bg-transparent px-1 text-center outline-none transition-colors duration-300 focus:border-primary-500"
-                            onChange={(event) =>
-                                setBirthdate(event.target.value)
-                            }
-                        />
-
-                        <PrimaryButton
-                            buttonText={'Sauvegarder'}
-                            onClick={editInformations}
-                        />
-                    </form>
-
-                    {/* Change password section */}
-                    <form className="flex min-w-80 flex-col items-center gap-3 rounded-md p-4 shadow-md shadow-neutral-500 md:w-1/2">
-                        <div className="font-bold">Changer le mot de passe</div>
-
-                        <p
-                            className={
-                                errMsgPwd
-                                    ? 'text-red-600 max-w-60 text-center'
-                                    : 'hidden'
-                            }
-                            aria-live="assertive"
-                        >
-                            {errMsgPwd}
-                        </p>
-
-                        <label htmlFor="oldpassword">Ancien mot de passe</label>
-                        <input
-                            type="password"
-                            name="oldpassword"
-                            className="rounded-md border-2 border-neutral-300 bg-transparent px-1 text-center outline-none transition-colors duration-300 focus:border-primary-500"
-                            onChange={(event) =>
-                                setOldPassword(event.target.value)
-                            }
-                        />
-
-                        <label htmlFor="newpassword">
-                            Nouveau mot de passe
-                        </label>
-                        <input
-                            type="password"
-                            name="newpassword"
-                            className="rounded-md border-2 border-neutral-300 bg-transparent px-1 text-center outline-none transition-colors duration-300 focus:border-primary-500"
-                            onChange={(event) =>
-                                setNewPassword(event.target.value)
-                            }
-                        />
-
-                        <PrimaryButton
-                            buttonText={'Sauvegarder'}
-                            disabled={passwordButtonDisabled}
-                            onClick={changePassword}
-                        />
-                    </form>
-
-                    <LinkButton
-                        buttonText={'Retour sur le profil'}
-                        primary={false}
-                        linkTo={`/profile/${user.name}`}
+                    <label htmlFor="firstname">Prénom</label>
+                    <input
+                        type="text"
+                        name="firstname"
+                        className="rounded-md border-2 border-neutral-300 bg-transparent px-1 text-center outline-none transition-colors duration-300 focus:border-primary-500"
+                        value={firstname}
+                        onChange={(event) => setFirstname(event.target.value)}
                     />
-                </section>
+
+                    <label htmlFor="lastname">Nom</label>
+                    <input
+                        type="text"
+                        name="lastname"
+                        value={lastname}
+                        className="rounded-md border-2 border-neutral-300 bg-transparent px-1 text-center outline-none transition-colors duration-300 focus:border-primary-500"
+                        onChange={(event) => setLastname(event.target.value)}
+                    />
+
+                    <label htmlFor="birthdate">Date de naissance</label>
+                    <input
+                        type="date"
+                        name="birthdate"
+                        value={birthdate}
+                        className="rounded-md border-2 border-neutral-300 bg-transparent px-1 text-center outline-none transition-colors duration-300 focus:border-primary-500"
+                        onChange={(event) => setBirthdate(event.target.value)}
+                    />
+
+                    <PrimaryButton
+                        buttonText={'Sauvegarder'}
+                        onClick={editInformations}
+                    />
+                </form>
+
+                {/* Change password section */}
+                <form className="flex min-w-80 flex-col items-center gap-3 rounded-md p-4 shadow-md shadow-neutral-500 md:w-1/2">
+                    <div className="font-bold">Changer le mot de passe</div>
+
+                    <p
+                        className={
+                            errMsgPwd
+                                ? 'text-red-600 max-w-60 text-center'
+                                : 'hidden'
+                        }
+                        aria-live="assertive"
+                    >
+                        {errMsgPwd}
+                    </p>
+
+                    <label htmlFor="oldpassword">Ancien mot de passe</label>
+                    <input
+                        type="password"
+                        name="oldpassword"
+                        className="rounded-md border-2 border-neutral-300 bg-transparent px-1 text-center outline-none transition-colors duration-300 focus:border-primary-500"
+                        onChange={(event) => setOldPassword(event.target.value)}
+                    />
+
+                    <label htmlFor="newpassword">Nouveau mot de passe</label>
+                    <input
+                        type="password"
+                        name="newpassword"
+                        className="rounded-md border-2 border-neutral-300 bg-transparent px-1 text-center outline-none transition-colors duration-300 focus:border-primary-500"
+                        onChange={(event) => setNewPassword(event.target.value)}
+                    />
+
+                    <PrimaryButton
+                        buttonText={'Sauvegarder'}
+                        disabled={passwordButtonDisabled}
+                        onClick={changePassword}
+                    />
+                </form>
+
+                <LinkButton
+                    buttonText={'Retour sur le profil'}
+                    primary={false}
+                    linkTo={`/profile/${user.name}`}
+                />
             </ClassicPage>
             <ToastContainer />
         </>

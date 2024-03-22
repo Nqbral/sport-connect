@@ -28,20 +28,13 @@ export default function EditWorkoutPage() {
             <ClassicPage
                 pageSelectedNavbar={PAGE_SELECTED.WORKOUT}
                 linkToBackButton={'/workout'}
+                sectionId={'section-edit-workout-page'}
             >
-                <section
-                    id="edit-workout-page"
-                    className="flex w-full flex-col items-center gap-3"
-                >
-                    <h2 className="text-xl font-bold">
-                        Édition d&apos;un programme
-                    </h2>
+                <h2 className="text-xl font-bold">
+                    Édition d&apos;un programme
+                </h2>
 
-                    <WorkoutForm
-                        isCreation={false}
-                        editedWorkout={editedWorkout}
-                    />
-                </section>
+                <WorkoutForm isCreation={false} editedWorkout={editedWorkout} />
             </ClassicPage>
         </>
     );

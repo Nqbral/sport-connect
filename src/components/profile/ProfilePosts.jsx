@@ -59,7 +59,7 @@ export default function ProfilePosts({ userPage }) {
                             return (
                                 <div
                                     key={post._id}
-                                    className="shadow-neutral flex min-w-64 flex-col justify-center gap-2 rounded-md p-4 shadow-md md:w-1/2"
+                                    className="shadow-neutral flex min-w-72 max-w-72 flex-col justify-center gap-2 rounded-md p-4 shadow-md md:w-1/2"
                                 >
                                     <div className="text-sm italic text-neutral-400">
                                         {strDate}

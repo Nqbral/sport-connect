@@ -1,10 +1,9 @@
 import { Dialog } from '@mui/material';
 import { useEffect, useState } from 'react';
 
+import REGEX_RULES from '../../constants';
 import PrimaryButton from '../buttons/PrimaryButton';
 import SecondaryButton from '../buttons/SecondaryButton';
-
-const DIGIT_REGEX = /^\d+$/;
 
 export default function EditRestModal({
     open,
@@ -50,7 +49,7 @@ export default function EditRestModal({
     }, [open, restEdited]);
 
     useEffect(() => {
-        setValidTimeRest(DIGIT_REGEX.test(timeRest));
+        setValidTimeRest(REGEX_RULES.DIGIT_REGEX.test(timeRest));
     }, [timeRest]);
 
     return (

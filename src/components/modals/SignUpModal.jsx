@@ -9,12 +9,10 @@ import axios from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import REGEX_RULES from '../../constants';
 import { AuthContext } from '../../context/auth.context';
 import PrimaryButton from '../buttons/PrimaryButton';
 import SecondaryButton from '../buttons/SecondaryButton';
-
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{4,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 export default function SignUpModal({ open, handleClose }) {
     const { storeToken, authenticateUser } = useContext(AuthContext);
@@ -38,11 +36,11 @@ export default function SignUpModal({ open, handleClose }) {
     const [errMsg, setErrMsg] = useState('');
 
     useEffect(() => {
-        setValidName(USER_REGEX.test(user));
+        setValidName(REGEX_RULES.USER_REGEX.test(user));
     }, [user]);
 
     useEffect(() => {
-        setValidPwd(PWD_REGEX.test(pwd));
+        setValidPwd(REGEX_RULES.PWD_REGEX.test(pwd));
         setValidMatch(matchPwd && pwd === matchPwd);
     }, [pwd, matchPwd]);
 
@@ -53,7 +51,10 @@ export default function SignUpModal({ open, handleClose }) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!USER_REGEX.test(user) || !PWD_REGEX.test(pwd)) {
+        if (
+            !REGEX_RULES.USER_REGEX.test(user) ||
+            !REGEX_RULES.PWD_REGEX.test(pwd)
+        ) {
             setErrMsg('Erreur de saisie');
             return;
         }

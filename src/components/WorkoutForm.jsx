@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useNavigate } from 'react-router-dom';
 
+import REGEX_RULES from '../constants';
 import PrimaryButton from './buttons/PrimaryButton';
 import SecondaryButton from './buttons/SecondaryButton';
 import ExerciseDraggable from './draggable/Exercise';
@@ -12,7 +13,6 @@ import AddRestModal from './modals/AddRestModal';
 import EditExerciseModal from './modals/EditExerciseModal';
 import EditRestModal from './modals/EditRestModal';
 
-const ALPHANUM_REGEX = /^[a-z\d\-_\s]+$/i;
 const API_URL = process.env.API_URL;
 
 export default function WorkoutForm({ isCreation, editedWorkout }) {
@@ -173,7 +173,7 @@ export default function WorkoutForm({ isCreation, editedWorkout }) {
 
     // Use effect for validating form
     useEffect(() => {
-        setValidName(ALPHANUM_REGEX.test(name));
+        setValidName(REGEX_RULES.ALPHANUM_REGEX.test(name));
     }, [name]);
 
     useEffect(() => {

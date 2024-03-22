@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-const ExercisesDraggable = forwardRef(({ children, ...props }, ref) => {
+const ExercisesDraggable = forwardRef(({ children }, ref) => {
     return (
         <ul
             ref={ref}
