@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import LinkButton from '../../components/buttons/LinkButton';
 import PrimaryButton from '../../components/buttons/PrimaryButton';
@@ -39,6 +41,9 @@ export default function EditProfilePage() {
                 },
             )
             .then((response) => {
+                toast.info('Informations utilisateur modifiés avec succès !', {
+                    icon: false,
+                });
                 console.log(response);
             })
             .catch((error) => {
@@ -65,6 +70,9 @@ export default function EditProfilePage() {
             )
             .then((response) => {
                 console.log(response);
+                toast.info('Mot de passe modifié avec succès !', {
+                    icon: false,
+                });
             })
             .catch((error) => {
                 console.log(error);
@@ -205,6 +213,7 @@ export default function EditProfilePage() {
                     />
                 </section>
             </ClassicPage>
+            <ToastContainer />
         </>
     );
 }
