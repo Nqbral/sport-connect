@@ -1,8 +1,32 @@
-# React + Vite
+# <img src="./src/assets/logo.png" alt="sportconnect-logo" width="32"/> SportConnect
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Table of contents
 
-Currently, two official plugins are available:
+-   [Introduction](#introduction)
+-   [Technologies](#technologies)
+-   [Features](#features)
+-   [API(s)](#apis)
 
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Introduction
+
+SportConnect is an app where the user can create his own workouts with a list of exercises and share it to his friends.
+You can use the app with this [Link](https://sport-connect.onrender.com/)
+
+## Technologies
+
+Project is created with :
+
+-   React
+-   Tailwind
+
+## Features
+
+-   Login/SignUp
+-   Create/Edit/Delete a workout
+-   Edit Profile
+-   Create a feed post
+-   Subscribe to people
+
+## APIs
+
+-   [Node Express Server](https://github.com/Nqbral/sport-connect-api)
