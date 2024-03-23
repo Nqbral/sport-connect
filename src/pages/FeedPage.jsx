@@ -57,6 +57,8 @@ export default function FeedPage() {
     };
 
     const addPost = (message) => {
+        const storedToken = localStorage.getItem('authToken');
+
         axios
             .post(
                 `${API_URL}/api/feedposts`,
