@@ -17,7 +17,7 @@ export default function ExerciseListTile({ exercise, index }) {
                 <div className="flex flex-row gap-4">
                     {exercise.type == 'exercise' ? (
                         <div className="flex flex-col">
-                            <div>Exercice : {exercise.name}</div>
+                            <div>Exercice : {exercise.exercise.name}</div>
                             <div>Nombre de séries : {exercise.nbSeries}</div>
                             <div>Nombre de répétitions : {exercise.nbReps}</div>
                             <div>Temps de repos : {exercise.timeRest}s</div>
