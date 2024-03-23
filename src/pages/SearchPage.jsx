@@ -47,7 +47,6 @@ export default function SearchPage() {
 
         const delayBounce = setTimeout(async () => {
             await fetchData();
-            setIsLoading(false);
         }, 1000);
 
         return () => clearTimeout(delayBounce);
@@ -67,6 +66,8 @@ export default function SearchPage() {
                 if (response.data.length == 0) {
                     setHasMoreData(false);
                 }
+
+                setIsLoading(false);
             })
             .catch((error) => console.log(error));
     };
