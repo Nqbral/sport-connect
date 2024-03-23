@@ -69,7 +69,10 @@ export default function SearchPage() {
 
                 setIsLoading(false);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                setIsLoading(false);
+            });
     };
 
     return (
